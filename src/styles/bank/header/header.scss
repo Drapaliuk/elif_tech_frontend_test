@@ -1,0 +1,26 @@
+.header {
+    width: 100%;
+    padding: 20px 35px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0  10px #000;
+}
+
+.header__app-logo {
+
+}
+
+.header__app-logo-icon {
+    width: 45px;
+    height: 45px;
+    fill: #ffc20e;
+}
+
+.header__logout-btn {
+    background-color: transparent;
+}
+
+.header__logout-icon {
+    width: 25px;
+    height: 25px;
+}

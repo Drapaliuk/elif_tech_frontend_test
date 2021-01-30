@@ -1,0 +1,19 @@
+.introduction {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.introduction__link-wrapper {
+}
+
+.introduction__link {
+    padding: 15px 50px;
+    margin-right: 15px;
+    background-color: #0c3866;
+    box-shadow: 0 0 10px gray;
+    border-radius: 8px;
+    color: #fff;
+
+}   

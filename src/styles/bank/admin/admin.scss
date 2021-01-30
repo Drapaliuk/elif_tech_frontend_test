@@ -1,0 +1,105 @@
+.bank-admin {
+    height: 100vh;
+    padding-top: 25px;
+}
+
+.bank-logo-icon {
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: auto;
+}
+
+.bank-name {
+    text-align: center;
+}
+.bank-admin__content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+.bank-conditions {
+    padding: 15px 25px;
+}
+
+.bank-conditions__item {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.bank-conditions__name-wrapper {
+    display: flex;
+    align-items: center;
+}   
+
+.bank-conditions__icon {
+    fill: yellow;
+    width: 32px;
+    height: 32px;
+}
+
+.bank-conditions__name {
+    margin-right: 50px;
+}
+
+.bank-conditions__value-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.bank-conditions__value {
+}
+
+.bank-conditions__update-value-btn {
+    background-color: transparent;
+}
+
+.bank-conditions__update-value-icon {
+    width: 22px;
+    height: 22px;
+    margin-left: 7px;
+}
+
+.bank-conditions__update-value-input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #000;
+}
+
+
+
+.bank-admin__service-wrapper {
+    padding: 15px 25px;
+}
+
+.bank-services {
+}
+
+.bank-services__item {
+    margin-bottom: 6px;
+}
+
+.bank-services__btn {
+    font-size: 1.75rem;
+    background-color: #537b35;
+    padding: 10px 50px;
+    border-radius: 8px;
+}
+
+.bank-admin__add-new-service {
+    color: #000;
+    font-size: 1.3rem;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 8px 0;
+    border: 1px solid #537b35;
+    border-radius: 4px;
+}

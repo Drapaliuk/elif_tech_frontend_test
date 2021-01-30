@@ -1,0 +1,111 @@
+.banks-list {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    padding: 40px;
+    padding-bottom: 100px;
+    position: relative;
+    height: 100vh;
+    overflow: auto;
+}
+
+.banks-list__title {
+    text-align: center;
+}
+
+.bank {
+    width: 23%;
+    padding-top: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    position: relative;
+    height: 350px;
+    background-color: rgba(252, 252, 252, .89);
+    box-shadow: 0 0 15px gray;
+}
+
+.bank__delete-btn,
+.bank__settings {
+    position: absolute;
+    background-color: transparent;
+    right: 10px;
+    opacity: .3;
+    transition: all .3s linear;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.bank__delete-icon,
+.bank__settings-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.bank__settings {
+    top: 10px;
+    color: #000;
+}
+
+.bank__delete-btn {
+    bottom: 10px;
+}
+
+
+.bank__logo-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: auto;
+}
+
+.bank__name {
+    font-size: 2rem;
+    text-align: center;
+    line-height: 0;
+    margin-bottom: 80px;
+}
+
+.bank-indicators {
+    padding: 10px 30px;
+}
+
+.bank-indicators__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bank-indicators__name-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.bank-indicators__icon {
+    margin-right: 15px;
+
+}
+
+.bank-indicators__name {
+    margin-right: 35px;
+    font-size: 1.3rem;
+}
+
+.bank-indicators__value {
+
+}
+
+
+
+
+.create-new-bank {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #537b35;
+    color: #fff;
+    padding: 15px 50px;
+    border-radius: 8px;
+}

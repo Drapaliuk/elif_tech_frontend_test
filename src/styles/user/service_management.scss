@@ -1,0 +1,131 @@
+.service-management {
+    height: 100vh;
+    padding: 45px;
+    position: relative;
+}
+
+.service-management__bank-name {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.service-name {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.service-management__content-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.service-params {
+    padding: 30px;
+    box-shadow: 0 0 15px gray;
+    border-radius: 8px;
+    background-color: rgba(240, 235, 235, .75);
+
+}
+
+.initial-loan {
+    text-align: center;
+}
+
+.initial-loan__title {
+    line-height: 0;
+    margin-bottom: 50px;
+}
+
+.initial-loan__set-loan-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.initial-loan__increment,
+.initial-loan__decrement {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    background-color: rgb(184, 176, 176);
+}
+
+.initial-loan__input {
+    height: 45px;
+    border: none;
+    font-size: 1.5rem;
+    padding: 3px 15px;
+}
+
+.service-params__item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+
+}
+
+.service-params__name-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.service-params__name {
+}
+
+.service-params__value {
+
+}
+
+.monthly-payments {
+    padding-top: 60px;
+    position: relative;
+
+}
+
+.monthly-payments_titles {
+    display: flex;
+    border: 1px solid #000;
+    position: absolute;
+    top: 0;
+
+}
+
+.monthly-payments__title {
+    border: 1px solid #000;
+    padding: 20px 0;
+    width: 180px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.monthly-payments__rows {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.monthly-payments__row {
+    display: flex;
+    padding: 5px 0;
+    border-bottom: 1px solid #000;
+
+}
+
+.monthly-payments__value {
+    width: 180px;
+    text-align: center;
+    height: 100%;
+}
+
+.confirm-btn {
+    padding: 20px 80px;
+    border-radius: 8px;
+    background-color: #009f4d;
+    display: block;
+    margin-top: 50px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+
+}
