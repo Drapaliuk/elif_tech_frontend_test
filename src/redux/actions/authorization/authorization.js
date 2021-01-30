@@ -36,3 +36,23 @@ export const logOut = () => {
     localStorageManipulator.deleteTokens()
     return {type: LOG_OUT}
 }
+
+export const checkOutAuth = () => async dispatch => {
+    try {
+        var response = await authAPI.checkOutAuth();
+        const {shouldUpdateTokens, payload} = response.data;
+
+        if(shouldUpdateTokens) {
+            const {newToken, newRefreshToken} = shouldUpdateTokens
+            localStorageManipulator.saveTokens(newToken, newRefreshToken)
+            updateDefaultRequestHeaders(newToken, newRefreshToken)
+        }
+
+        var { role } = payload
+
+        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
+
+    } catch (error) {
+        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: false}});
+    }
+}

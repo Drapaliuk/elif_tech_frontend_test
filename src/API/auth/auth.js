@@ -12,4 +12,6 @@ export const authAPI = {
     logout: token => {
         return instance.delete('/auth/logout', {headers: {Authorization: token}})
     },
+
+    checkOutAuth: () => instance.post('/auth/check-out-auth'),
 }

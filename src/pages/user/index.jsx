@@ -1,3 +1,3 @@
-export { BankServiceManagement } from './service_management/BankServiceManagement';
+export { AvailableServices } from './available_services/AvailableServices';
 export { BanksList } from '../common/banks_list/BanksList';
-export { User } from './User';
+export { SelectedService } from './selected_service/SelectedService';

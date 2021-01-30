@@ -1,10 +1,10 @@
 import React from 'react'
 import { MdAttachMoney } from 'react-icons/md'
 import { NavLink } from 'react-router-dom'
-import { Header } from '../../bank'
-import { BackBtn } from '../../common'
+import { Header } from '../../bank_admin'
+import { BackBtn } from '../../common';
 
-export function BankServiceManagement() {
+export function SelectedService() {
     return (
         <>
             <Header />

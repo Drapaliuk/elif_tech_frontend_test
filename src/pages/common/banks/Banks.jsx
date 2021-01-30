@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { MyBanks } from '../../bank/my_banks/MyBanks';
+import { MyBanks } from '../../bank_admin/my_banks/MyBanks';
 import { AvailableBanks } from '../../user/available_banks/AvailableBanks';
 
 export function Banks() {

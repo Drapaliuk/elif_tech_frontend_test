@@ -1,3 +1,3 @@
 export * from './common';
-export * from './bank';
+export * from './bank_admin';
 export * from './user';

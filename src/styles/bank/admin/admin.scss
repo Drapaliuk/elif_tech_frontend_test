@@ -1,6 +1,7 @@
 .bank-admin {
     height: 100vh;
     padding-top: 25px;
+    position: relative;
 }
 
 .bank-logo-icon {
@@ -88,9 +89,10 @@
 
 .bank-services__btn {
     font-size: 1.75rem;
-    background-color: #537b35;
+    background-color: #009f4d;
     padding: 10px 50px;
     border-radius: 8px;
+    color: #fff;
 }
 
 .bank-admin__add-new-service {
@@ -100,6 +102,21 @@
     margin: auto;
     text-align: center;
     padding: 8px 0;
-    border: 1px solid #537b35;
+    border: 1px solid #009f4d;
     border-radius: 4px;
+}
+
+
+.bank-service-details {
+    background-color: #009f4d;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    display: block;
+    margin: auto;
+    padding: 10px 0;
+    margin-top: 25px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+
 }

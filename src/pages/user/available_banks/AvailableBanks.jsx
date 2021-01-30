@@ -1,9 +1,8 @@
 import React from 'react'
-import { Header } from '../../bank'
+import { Header } from '../../bank_admin'
 import { BanksList } from '../../common/banks_list/BanksList'
 
 export function AvailableBanks({userRole}) {
-
     return (
         <>
             <Header />
