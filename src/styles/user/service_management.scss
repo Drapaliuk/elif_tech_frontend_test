@@ -28,16 +28,19 @@
 
 }
 
-.initial-loan {
+.initial-loan,
+.loan-term {
     text-align: center;
 }
 
-.initial-loan__title {
+.initial-loan__title,
+.loan-term__title {
     line-height: 0;
     margin-bottom: 50px;
 }
 
-.initial-loan__set-loan-wrapper {
+.initial-loan__set-loan-wrapper,
+.loan-term__set-loan-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +48,9 @@
 }
 
 .initial-loan__increment,
-.initial-loan__decrement {
+.initial-loan__decrement,
+.loan-term__decrement,
+.loan-term__increment {
     width: 45px;
     height: 45px;
     font-size: 1.5rem;
@@ -57,6 +62,24 @@
     border: none;
     font-size: 1.5rem;
     padding: 3px 15px;
+}
+
+.loan-term__btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.loan-term__input {
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    font-size: 1.3rem;
+    margin: 0;
+    border: none;
+    margin-right: 5px;
+    margin-left: 5px;
+
+    background-color: transparent;
 }
 
 .service-params__item {
@@ -89,6 +112,7 @@
     border: 1px solid #000;
     position: absolute;
     top: 0;
+    right: 0;
 
 }
 

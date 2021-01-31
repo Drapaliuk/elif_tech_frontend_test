@@ -5,7 +5,6 @@ import { BanksList } from '../../user'
 import { Header } from '../header/Header'
 
 export function MyBanks({userRole, banks}) {
-    console.log('banks!!', banks)
     const [isCreatingBank, setCreatingBank] = React.useState(false);
     const dispatch = useDispatch();
     const createBankHandler = data => () => setCreatingBank(data);

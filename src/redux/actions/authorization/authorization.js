@@ -1,15 +1,14 @@
 import { authAPI } from "../../../API"
 import { updateDefaultRequestHeaders } from "../../../API/configs/instance";
 import { localStorageManipulator } from "../../../utils";
-import { SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION } from '../../actions_types';
+import { SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION, AUTH_FETCH_STATUS } from '../../actions_types';
 
 const authReset = () => ({type: LOG_OUT})
 export const setRoleForAuthorization = role => ({type: SET_AUTH_ROLE, payload: {role}})
 export const setAuthError = payload => ({type: SET_AUTH_ERROR, payload})
-
+const fetchStatus = status => ({type: AUTH_FETCH_STATUS, payload: {status}})
 
 export const authorization = (authData, authorizationAction) => async dispatch => {
-console.log('authData', authData)
     try {
         let responseData;
         if(authorizationAction === 'registration') {
@@ -19,7 +18,6 @@ console.log('authData', authData)
             responseData = (await authAPI.login(authData)).data;
         }
 
-        console.log('responseData', responseData)
 
         var {token, refreshToken, role} = responseData;
         localStorageManipulator.saveTokens(token, refreshToken)
@@ -39,6 +37,7 @@ export const logOut = () => {
 
 export const checkOutAuth = () => async dispatch => {
     try {
+        dispatch(fetchStatus('loading'))
         var response = await authAPI.checkOutAuth();
         const {shouldUpdateTokens, payload} = response.data;
 
@@ -51,6 +50,7 @@ export const checkOutAuth = () => async dispatch => {
         var { role } = payload
 
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
+        dispatch(fetchStatus('loaded'))
 
     } catch (error) {
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: false}});

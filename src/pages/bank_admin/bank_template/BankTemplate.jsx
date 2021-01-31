@@ -18,7 +18,6 @@ export function BankTemplate({createBankHandler}) {
         const isNaN = Number.isNaN(valueToNumber)
   
         if(!isNaN && isNumber ) {
-            console.log('inside')
             return {...prevState, [indicatorName]: Number(target.value)}
 
         }

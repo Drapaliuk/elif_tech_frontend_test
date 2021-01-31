@@ -5,16 +5,16 @@ const interestPaymentCalculator = (loanBalance, interestRate) => {
 }
 
 const StatisticsByMonth = function(month, totalPayment, interestPayment, loanBalance, equity) {
-    this.month = month
-    this.totalPayment = totalPayment
-    this.interestPayment = interestPayment
-    this.loanBalance = loanBalance
-    this.equity = equity
+    this.month =  Math.round(month)
+    this.totalPayment =  Math.round(totalPayment)
+    this.interestPayment =  Math.round(interestPayment)
+    this.loanBalance =  Math.round(loanBalance)
+    this.equity =  Math.round(equity)
 }
 
 const bankInfo = {
-    fullSum: 65000,
-    downPayment: 20000,
+    loanSum: 65000,
+    minimumDownPayment: 20000,
     loanTerm: 3,
     interestRate: 5
 }
@@ -22,16 +22,22 @@ const bankInfo = {
 
 
 export const mortgageCalculator = (bankInfo) => {
-    const fullSum = bankInfo.fullSum;
-    const downPayment = bankInfo.downPayment;
-    const loanBalance = fullSum - downPayment;
+    if(
+        bankInfo.loanSum <= bankInfo.minimumDownPayment ||
+        bankInfo.loanTerm === 0
+        ) {
+        return []
+    }
+    const loanSum = bankInfo.loanSum;
+    const minimumDownPayment = bankInfo.minimumDownPayment;
+    const loanBalance = loanSum - minimumDownPayment;
     const loanTerm = bankInfo.loanTerm;
     const clearMonthlyPayment = loanBalance / loanTerm;
     const interestPaymentsByMonth = [];
     const equityByMonth = [];
     const loanBalanceByMonth = []
-    let previousMonthLoanBalance = fullSum - downPayment;
-    let equity = bankInfo.downPayment;
+    let previousMonthLoanBalance = loanSum - minimumDownPayment;
+    let equity = bankInfo.minimumDownPayment;
     const result = []
 
     for(let i = 0; i < loanTerm; i++) {
@@ -47,5 +53,7 @@ export const mortgageCalculator = (bankInfo) => {
     for(let i = 0; i < loanTerm; i++) {
         result.push(new StatisticsByMonth((i + 1), (clearMonthlyPayment + interestPaymentByMonth), interestPaymentsByMonth[i], loanBalanceByMonth[i], equityByMonth[i]))
     }
+
+    return result
 
 }

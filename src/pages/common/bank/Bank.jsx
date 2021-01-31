@@ -35,7 +35,7 @@ export function Bank({bankInfo, isAdmin, deleteBankHandler}) {
                                     <GoLightBulb className = 'bank-indicators__icon' />
                                 <div className = 'bank-indicators__name'>{indicator.name}</div>
                                 </div>
-                                <div className = 'bank-indicators__value'>{`${bankInfo[indicator.key]} ${indicator.units}`} </div>
+                                <div className = 'bank-indicators__value'>{`${bankInfo.indicators[indicator.key]} ${indicator.units}`} </div>
                             </li>
                         )
                     })

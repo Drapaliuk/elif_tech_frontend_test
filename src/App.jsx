@@ -10,21 +10,30 @@ export function App() {
   React.useEffect(() => {
     dispatch(checkOutAuth())
   }, [])
-  const isAuthorization = useSelector(state => state.authorization.isAuthorization)
-  return (
-    <div className='container'>
-      
-      <BrowserRouter >
-        {!isAuthorization && <Redirect to = '/auth' />}
-        <Route path = '/auth' component = {Authorization} />
-        <Route exact path = '/banks' component = {Banks} />
-        {/* <Route exact path = '/banks/creating' component = {BankServiceManagement} /> */}
-        <Route exact path = '/bank/management-services' component = {ServicesManagement} />
-        <Route exact path = '/bank/services' component = {AvailableServices} />
-        <Route exact path = '/bank/selected-service' component = {SelectedService} />
 
-      </BrowserRouter>
-    </div>
-    
-  );
+  
+  const authFetchStatus = useSelector(state => state.authorization.fetchStatus)
+  const isAuthorization = useSelector(state => state.authorization.isAuthorization)
+
+    if(authFetchStatus === 'loading') {
+      return <h1>Loading</h1>
+    }
+
+    return (
+      <div className='container'>
+        <BrowserRouter >
+          {!isAuthorization && <Redirect to = '/auth' />}
+          <Route path = '/auth' component = {Authorization} />
+          <Route exact path = '/banks' component = {Banks} />
+          <Route exact path = '/bank/management-services' component = {ServicesManagement} />
+          {/* <Route exact path = '/bank/services' component = {AvailableServices} /> */}
+          <Route exact path = '/bank/services' component = {ServicesManagement} />
+
+          <Route exact path = '/bank/selected-service' component = {SelectedService} />
+        </BrowserRouter>
+      </div>
+    );
+
+  return null
+  
 }

@@ -24,3 +24,16 @@
     width: 25px;
     height: 25px;
 }
+
+.balance-display {
+    display: flex;
+    align-items: center;
+}
+.balance-display__title {
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.balance-display__value {
+
+}

@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { CREATE_BANK, DELETE_BANK, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK } from '../../actions_types';
+import { CREATE_BANK, DELETE_BANK, BANK_FETCH_STATUS, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK } from '../../actions_types';
 
 const initialState = {
     banks: [],
@@ -17,12 +17,13 @@ const initialState = {
 
 export const banks = (prevState = initialState, action) => {
     switch(action.type) {
-        // case BANK_FETCH_STATUS: {
-        //     return {
-        //         ...prevState,
-        //         fetchStatus: payload.status
-        //     }
-        // }
+        case BANK_FETCH_STATUS: {
+            return {
+                ...prevState,
+                fetchStatus: action.payload.status
+            }
+        }
+        
         case SELECTED_BANK:
             return {
                 ...prevState,
@@ -30,7 +31,6 @@ export const banks = (prevState = initialState, action) => {
             }
 
         case CREATE_BANK:
-            console.log('payload', action.payload)
             return {
                 ...prevState,
                 banks: [action.payload.createdBank, ...prevState.banks],
@@ -38,20 +38,19 @@ export const banks = (prevState = initialState, action) => {
             }
 
         case DELETE_BANK: 
-            console.log('payload', action.payload)
             return produce(prevState, draftState => {
                 const deletedBankIdx = draftState.banks.findIndex(bank => bank._id === action.payload.deletedBankId)
                 draftState.banks.splice(deletedBankIdx, 1)
             })
         
         case UPDATE_BANK: 
-            console.log(action.payload)
             return produce(prevState, draftState => {
                 const updatedBankIdx = draftState.banks.findIndex(bank => bank._id === action.payload.bankId)
                 draftState.banks[updatedBankIdx].indicators = action.payload.updatedIndicators
             })
             
         case GET_BANKS:
+            console.log(action.payload)
             return {
                 ...prevState,
                 banks: [...prevState.banks, ...action.payload.allBanks]
