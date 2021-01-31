@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from 'redux-form';
 import { authorization } from "./authorization/authorization_reducer";
-import { initialize } from './initialize/initialize';
+import { banks } from './banks/banks';
 
 export const combinedReducers = combineReducers({
     authorization,
-    initialize, 
+    banks,
     form: formReducer
 }) 

@@ -1,10 +1,26 @@
 import React from 'react'
 import { MdAttachMoney } from 'react-icons/md'
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
+import { getSelectedBank } from '../../../redux/selectors/bank/bank';
+import { mortgageCalculator } from '../../../utils/mortgage_calclator/mortgage_calculator';
 import { Header } from '../../bank_admin'
 import { BackBtn } from '../../common';
 
 export function SelectedService() {
+    const [loanSum, setLoanSum] = React.useState(0)
+    const selectedBank = useSelector(state => getSelectedBank(state))
+    const changeLoanHandler = e => setLoanSum()
+
+    const incrementHandler = () => setLoanSum(loanSum + 1000)
+    const decrementHandler = () => {
+        const decrementedSum = loanSum - 1000
+        if(decrementedSum >= 0) {
+            return setLoanSum(decrementedSum)
+        }
+    }
+    console.log(selectedBank)
+
     return (
         <>
             <Header />
@@ -17,9 +33,9 @@ export function SelectedService() {
                         <div className = 'initial-loan'>
                             <h2 className = 'initial-loan__title'>Loan</h2>
                             <div className = 'initial-loan__set-loan-wrapper'>
-                                <button className = 'initial-loan__increment'>+</button>
-                                <input className = 'initial-loan__input' type="text" placeholder = '0'/>
-                                <button className = 'initial-loan__decrement'>-</button>
+                                <button onClick = {incrementHandler} className = 'initial-loan__increment'>+</button>
+                                <input value = {loanSum} className = 'initial-loan__input' type="text" placeholder = '0'/>
+                                <button onClick = {decrementHandler} className = 'initial-loan__decrement'>-</button>
                             </div>
                         </div>
                         <div className = 'service-params__item'>
@@ -33,7 +49,6 @@ export function SelectedService() {
                     </div>
                     <div className = 'monthly-payments'>
                         <div className = 'monthly-payments_titles'>
-                            <div className = 'monthly-payments__title'>Year</div>
                             <div className = 'monthly-payments__title'>Month</div>
                             <div className = 'monthly-payments__title'>Total payment</div>
                             <div className = 'monthly-payments__title'>Interest payment</div>
@@ -41,49 +56,6 @@ export function SelectedService() {
                         </div>
                         <div className='monthly-payments__rows'>
                             <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
-                                <div className = 'monthly-payments__value'>1</div>
-                                <div className = 'monthly-payments__value'>2300</div>
-                                <div className = 'monthly-payments__value'>1231</div>
-                                <div className = 'monthly-payments__value'>12312312</div>
-                            </div>
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>2020</div>
                                 <div className = 'monthly-payments__value'>1</div>
                                 <div className = 'monthly-payments__value'>2300</div>
                                 <div className = 'monthly-payments__value'>1231</div>

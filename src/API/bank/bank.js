@@ -1,9 +1,9 @@
 import {instance} from '../configs/instance';
 
 export const bankAPI = {
-    create: bankData => instance.post('/banks', bankData),
-    delete: bankId => instance.delete('/banks', {bankId}),
-    update: (selectedBankId, newValue) => instance.put('/banks', {selectedBankId, newValue}),
-    getAvailableBanks: () => instance.get('/banks/available-banks'),
-    getMyBanks: () => instance.get('/banks/my-banks')
+    create: infoAboutNewBank => instance.post('/bank', {infoAboutNewBank}),
+    delete: bankId => instance.delete('/bank', {data: {bankId}}),
+    update: (selectedBankId, newValue) => instance.put('/bank', {selectedBankId, newValue}),
+    getBanks: () => instance.get('/bank'),
+    // getMyBanks: () => instance.get('/bank/my-banks')
 }

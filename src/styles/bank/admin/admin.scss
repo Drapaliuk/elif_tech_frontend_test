@@ -22,10 +22,12 @@
 }
 
 .bank-conditions {
-    padding: 15px 25px;
+    padding: 60px 25px;
+    position: relative;
 }
 
 .bank-conditions__item {
+    width: 700px;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -107,7 +109,8 @@
 }
 
 
-.bank-service-details {
+.bank-service-details,
+.bank-conditions__save-btn {
     background-color: #009f4d;
     width: 100%;
     text-align: center;
@@ -118,5 +121,7 @@
     margin-top: 25px;
     border-radius: 8px;
     font-size: 1.3rem;
-
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
