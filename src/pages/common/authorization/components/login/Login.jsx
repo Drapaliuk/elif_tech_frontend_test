@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { authorization, login, setAuthError } from '../../../../../redux/actions';
 import { getAuthData, getAuthError } from '../../../../../redux/selectors';
-import { serverErrorsMessages } from '../../../../../service/server_errors/server_errors';
+import { serverErrorsMessages } from '../../../../../service_resources';
 import { AuthForm } from '../auth_form/AuthForm';
 export function Login() {
     const authData = useSelector(state => getAuthData(state));

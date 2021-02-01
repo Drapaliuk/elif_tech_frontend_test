@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from '../../bank_admin'
+import { Header } from '../../../components'
 import { BanksList } from '../../common/banks_list/BanksList'
 
 export function AvailableBanks({userRole, banks}) {

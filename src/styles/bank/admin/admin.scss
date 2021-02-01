@@ -60,6 +60,10 @@
 .bank-conditions__value {
 }
 
+.bank-conditions__value.bank-conditions__value_draft {
+    text-decoration: line-through;
+} 
+
 .bank-conditions__update-value-btn {
     background-color: transparent;
 }

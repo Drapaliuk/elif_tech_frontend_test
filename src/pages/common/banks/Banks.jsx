@@ -9,14 +9,14 @@ export function Banks() {
     const banksFetchStatus = useSelector(state => state.banks.fetchStatus);
     const authFetchStatus = useSelector(state => state.authorization.fetchStatus)
     
-    const banks = useSelector(state => state.banks.banks)
-    console.log(banksFetchStatus)
     React.useEffect(() => {
         if(banksFetchStatus === 'idle' && authFetchStatus === 'loaded') {
             console.log('request')
             dispatch(getBanks())
         }
     }, [])
+    
+    const banks = useSelector(state => state.banks.banks)
     const userRole = useSelector(state => state.authorization.userRole)
     const isAdmin = userRole === 'admin';
 

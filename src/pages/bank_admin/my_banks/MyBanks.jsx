@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteBank } from '../../../redux/actions/banks/banks'
 import { BanksList } from '../../user'
-import { Header } from '../header/Header'
+import { Header } from '../../../components'
 
 export function MyBanks({userRole, banks}) {
     const [isCreatingBank, setCreatingBank] = React.useState(false);

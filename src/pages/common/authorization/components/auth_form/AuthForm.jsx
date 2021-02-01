@@ -1,8 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { minLength, required } from '../../../../../utils';
-import { PasswordField } from './PasswordField';
-import { LoginField } from './LoginField';
+import { minLength, required } from '../../../../../tools';
+import { PasswordField, LoginField } from './components';
 
 const validators = [required, minLength];
 

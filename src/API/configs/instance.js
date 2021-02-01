@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {localStorageManipulator} from '../../utils';
+import {localStorageManipulator} from '../../tools';
 import {store} from '../../redux/store';
 import { networkConnectionStatus, serverInaccessible } from '../../redux/actions';
 const AUTH_TOKEN = localStorageManipulator.getToken()

@@ -1,6 +1,6 @@
 import { authAPI } from "../../../API"
 import { updateDefaultRequestHeaders } from "../../../API/configs/instance";
-import { localStorageManipulator } from "../../../utils";
+import { localStorageManipulator } from "../../../tools";
 import { SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION, AUTH_FETCH_STATUS } from '../../actions_types';
 
 const authReset = () => ({type: LOG_OUT})
