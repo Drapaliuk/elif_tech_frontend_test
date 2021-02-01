@@ -5,5 +5,5 @@ export const bankAPI = {
     delete: bankId => instance.delete('/bank', {data: {bankId}}),
     update: (selectedBankId, newValue) => instance.put('/bank', {selectedBankId, newValue}),
     getBanks: () => instance.get('/bank'),
-    // getMyBanks: () => instance.get('/bank/my-banks')
+    updateBalance: newBalance => instance.put('/bank/balance', {newBalance})
 }

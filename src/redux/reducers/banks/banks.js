@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { CREATE_BANK, DELETE_BANK, BANK_FETCH_STATUS, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK } from '../../actions_types';
+import { CREATE_BANK, DELETE_BANK, BANK_FETCH_STATUS, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK, SET_USER_BALANCE, UPDATE_USER_BALANCE } from '../../actions_types';
 
 const initialState = {
     banks: [],
@@ -7,6 +7,7 @@ const initialState = {
     banksServiceProvidersToUser: [],
     fetchStatus: 'idle',
     selectedBankId: '',
+    userBalance: 0
 
 }
 
@@ -17,10 +18,25 @@ const initialState = {
 
 export const banks = (prevState = initialState, action) => {
     switch(action.type) {
+
+        case UPDATE_USER_BALANCE: {
+            return {
+                ...prevState,
+                userBalance: action.payload.updatedBalance
+            }
+        }
+
         case BANK_FETCH_STATUS: {
             return {
                 ...prevState,
                 fetchStatus: action.payload.status
+            }
+        }
+
+        case SET_USER_BALANCE: {
+            return {
+                ...prevState,
+                userBalance: action.payload.balance
             }
         }
         

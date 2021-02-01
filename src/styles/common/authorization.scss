@@ -62,13 +62,19 @@
   fill: hsla(0, 3%, 32%, 1);
 }
 
+.authorization__invalid-icon  {
+  fill: #9a3433;
+  color: #9a3433
+}
 
 .authorization__input-icon.authorization__invalid-icon {
   fill: #9a3433;
+  color: #9a3433
 }
 
 .authorization__input-icon.authorization__valid-icon {
   fill: #279b37;
+  color: #279b37
 }
 
 .authorization__input-icon {
@@ -309,7 +315,7 @@
 .registration__passsword,
 .registration__login,
 .registration__btn-done,
-.login__passsword,
+.login__password,
 .login__login,
 .login__btn-done,
 .check-code__check-code,

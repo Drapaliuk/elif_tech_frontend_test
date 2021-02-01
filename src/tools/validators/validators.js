@@ -33,6 +33,9 @@ export const minLength = value => {
     // return  value && value.length < 10 ? {name: 'Too short', message: 'Must be 10 characters or more'} : undefined
 }
 
+export const onlyNumbers = value => isNumber(value) ? undefined : {name: 'Require numbers', message: 'Require only numbers!'}
+
+
 export const objectsValidator = (targetObject, callback) => {
     const result = []
     for(let key in targetObject) {

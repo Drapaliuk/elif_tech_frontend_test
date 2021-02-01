@@ -8,4 +8,6 @@ export const getAuthData = (state) => {
 
 export const getAuthStatus = state => state.authorization.isAuthorization
 export const getFetchingCheckAuthStatus = state => state.authorization.isFetchingCheckAuth
-export const getAuthError = state => state.authorization.error;
+export const getAuthError = state => state.authorization.error
+export const getInitialUserBalance = state => state.form.auth?.values?.balance
+export const getCurrentUserBalance = state => state.banks.userBalance

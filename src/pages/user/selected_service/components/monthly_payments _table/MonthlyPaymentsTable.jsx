@@ -1,7 +1,7 @@
 import React from 'react'
 import { amountYearsCalculator } from '../../../../../tools';
 
-// const randomBalance = 
+// const randomBalance = const randomUserBalance = () => +(Math.random() * (1000000 - 500000) + 500000).toFixed()
 
 export function MonthlyPaymentsTable({paymentsByMonth}) {
     return (

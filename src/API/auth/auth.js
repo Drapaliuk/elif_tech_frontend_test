@@ -5,8 +5,8 @@ export const authAPI = {
         return instance.post('/auth/login', authData)
     },
     
-    registration: (authData) => {
-        return instance.post('/auth/registration', authData)
+    registration: (authData, balance) => {
+        return instance.post('/auth/registration', {...authData, balance})
     },
     
     logout: token => {

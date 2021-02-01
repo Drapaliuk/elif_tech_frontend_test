@@ -5,3 +5,4 @@ export const LOG_OUT = 'authorization/LOG_OUT';
 export const SET_AUTH_ROLE = 'authorization/SET_AUTH_ROLE';
 export const APP_AUTHORIZATION = 'authorization/APP_AUTHORIZATION';
 export const AUTH_FETCH_STATUS = 'authorization/AUTH_FETCH_STATUS';
+

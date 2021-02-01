@@ -5,4 +5,6 @@ export const GET_BANKS = 'bank/GET_BANKS';
 export const GET_MY_BANKS = 'bank/GET_MY_BANKS';
 export const SELECTED_BANK = 'bank/SELECTED_BANK';
 export const BANK_FETCH_STATUS = 'bank/BANK_FETCH_STATUS';
+export const SET_USER_BALANCE = 'bank/SET_USER_BALANCE';
+export const UPDATE_USER_BALANCE = 'bank/UPDATE_USER_BALANCE';
 

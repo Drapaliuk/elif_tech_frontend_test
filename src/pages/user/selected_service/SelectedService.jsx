@@ -1,13 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom'
 import { getSelectedBank } from '../../../redux/selectors';
 import { isValidIndicatorValue, mortgageCalculator, increment, decrement } from '../../../tools';
 import { Header, BackBtn } from '../../../components';
 import { LoanTerm, MonthlyPaymentsTable, ServiceIndicator } from './components';
 import { mainBankIndicators } from '../../../service_resources';
+import { updateBalance } from '../../../redux/actions';
 
 export function SelectedService() {
+    const dispatch = useDispatch();
     const selectedBank = useSelector(state => getSelectedBank(state))
     const [loanSum, setLoanSum] = React.useState(selectedBank?.indicators.minimumDownPayment);
     const [changedLoanTerm, setLoanTerm] = React.useState(1);
@@ -22,11 +24,9 @@ export function SelectedService() {
         if(isValidValue) return setLoanSum(+target.value)
     }
 
-
-    const incrementLoanTermHandler = increment(changedLoanTerm, 1, Infinity, setLoanTerm)
-    const decrementLoanTermHandler = decrement(changedLoanTerm, 1, 0, setLoanTerm)
     const incrementLoanSumHandler = increment(loanSum, 1000, maximumLoan, setLoanSum)
     const decrementLoanSumHandler = decrement(loanSum, 1000, 0, setLoanSum)
+    const updateBalanceHandler = () => dispatch(updateBalance(loanSum)) 
 
     const {paymentsByMonth, totalInterestPayments} = mortgageCalculator({...indicators, loanSum, loanTerm: changedLoanTerm})
     return (
@@ -54,7 +54,7 @@ export function SelectedService() {
                                                   value = {selectedBank.indicators[indicator.key]} />
                         })}
                         <ServiceIndicator name = 'Total interest payments: ' value = {totalInterestPayments} />
-                        <NavLink to = '#' className = 'confirm-btn'>Confirm</NavLink>
+                        <button onClick = {updateBalanceHandler} className = 'confirm-btn'>Confirm</button>
                         {isLessThanDownPayment  ? <div className = 'service-params__warning-message'>
                                                         Loan sum is less then minimum down payment.
                                                         Input value to loan sum field

@@ -1,30 +1,29 @@
 import React from 'react';
 import { IoMdEyeOff } from 'react-icons/io'
 import { IoMdEye } from 'react-icons/io'
-import { CgLock } from 'react-icons/cg';
+import { MdAttachMoney } from 'react-icons/md';
 import { FaExclamation } from 'react-icons/fa';
 import classNames from 'classnames';
 
-
-export const PasswordField = ({input, meta, ...attributes}) => {
+export const UserBalanceField = ({input, meta, ...attributes}) => {
     const {touched, invalid, error} = meta;
     
     const isInvalid = touched && invalid;
     const [isVisibleErrorMessage, setVisibleErrorMessage] = React.useState(false);
-    const [isVisiblePassword, setVisiblePassword] = React.useState(false);
+    const [isVisibleBalance, setVisibleBalance] = React.useState(false);
 
     const onShowInvalidMessage = () => setVisibleErrorMessage(!isVisibleErrorMessage)
-    const onShowPassword = () => setVisiblePassword(!isVisiblePassword)
+    const onShowPassword = () => setVisibleBalance(!isVisibleBalance)
 
 
     return  (<div class="login__input-wrapper">
         <label for="login-password">
-            <CgLock className = {classNames('authorization__input-icon', {
+            <MdAttachMoney className = {classNames('authorization__input-icon', {
                 'authorization__invalid-icon': isInvalid,
                 'authorization__valid-icon': !isInvalid
             })}  />
         </label>
-        <input className="login__password" type = {isVisiblePassword ? 'text' : 'password'} {...input} {...attributes} />
+        <input className="login__password" type = {isVisibleBalance ? 'text' : 'password'} {...input} {...attributes} />
         {attributes.serverError}
 
         {
@@ -38,7 +37,7 @@ export const PasswordField = ({input, meta, ...attributes}) => {
         {
             <button className = 'visible-password-btn' type = 'button' onClick = {onShowPassword}>
                 {
-                    isVisiblePassword 
+                    isVisibleBalance 
                         ? 
                     <IoMdEye className = 'visible-password-icon' />
                         :

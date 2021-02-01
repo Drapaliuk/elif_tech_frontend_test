@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthForm } from '../auth_form/AuthForm';
 import { AiOutlineClose, AiOutlineUserAdd } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
-import { getAuthData, getAuthError } from '../../../../../redux/selectors';
+import { getAuthData, getAuthError, getInitialUserBalance } from '../../../../../redux/selectors';
 import { authorization, setAuthError } from '../../../../../redux/actions';
 import { serverErrorsMessages } from '../../../../../service_resources';
 
 export function Registration() {
     const dispatch = useDispatch();
     const authData = useSelector(state => getAuthData(state));
+    const userBalance = useSelector(state => getInitialUserBalance(state));
+
     const serverError = useSelector(state => getAuthError(state));
-    const onSubmit = () => dispatch(authorization(authData, 'registration'))
+    const onSubmit = () => dispatch(authorization(authData, 'registration', userBalance))
     const onClearAuthError = () => dispatch(setAuthError(''))
     return (
             <div class="registration">
@@ -22,7 +24,7 @@ export function Registration() {
                     <AiOutlineClose className = 'auth__close-icon' />
                 </NavLink>
                 <h2 class="registration__header">Registration</h2>
-                <AuthForm onSubmit = {onSubmit}  />
+                <AuthForm onSubmit = {onSubmit} showBalanceField = {true}  />
             {
                 serverError &&
                 <div class="server-error-message">
