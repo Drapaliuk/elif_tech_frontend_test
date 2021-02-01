@@ -50,7 +50,6 @@ export const banks = (prevState = initialState, action) => {
             })
             
         case GET_BANKS:
-            console.log(action.payload)
             return {
                 ...prevState,
                 banks: [...prevState.banks, ...action.payload.allBanks]

@@ -1,6 +1,5 @@
-export const numbersValidator = value => {
+export const isNumber = value => {
     const valueType = typeof value;
-    console.log('valueType', valueType)
     if(valueType !== 'number' && valueType !== 'string') return false 
     
     const valueToNumber = Number(value);
@@ -15,7 +14,7 @@ export const maxSumValidator = (value, max) => value <= max ? true : false
 export const minSumValidator = (value, min) => value >= min ? true : false
 
 export const isValidIndicatorValue = (value, min = 0, max = Infinity) => {
-        const isValueNumber = numbersValidator(value)
+        const isValueNumber = isNumber(value)
         if(isValueNumber) {
             const valueToNumber = Number(value)
             const isValidValueAmount = maxSumValidator(valueToNumber, max) &&
@@ -32,4 +31,15 @@ export const required = value => {
 export const minLength = value => {
     return
     // return  value && value.length < 10 ? {name: 'Too short', message: 'Must be 10 characters or more'} : undefined
+}
+
+export const objectsValidator = (targetObject, callback) => {
+    const result = []
+    for(let key in targetObject) {
+        const validationResult = callback(key, targetObject[key])
+        if(validationResult) {
+            result.push(validationResult)
+        }
+    }
+    return result
 }

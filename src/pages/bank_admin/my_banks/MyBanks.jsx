@@ -13,7 +13,6 @@ export function MyBanks({userRole, banks}) {
     return (
         <>
             <Header />
-            <h1 className = 'banks-list__title'>My banks</h1>
             <BanksList {...{userRole, isCreatingBank, createBankHandler, banks, deleteBankHandler}} />
             <button disabled = {isCreatingBank} onClick = {createBankHandler(true)} className = 'create-new-bank'>Create bank</button>
         </>

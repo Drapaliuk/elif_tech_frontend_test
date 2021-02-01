@@ -1,18 +1,25 @@
 .banks-list {
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-between;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 25px;;
+    padding: 20px;
     padding-bottom: 100px;
     position: relative;
     height: 100vh;
     overflow: auto;
+    @media(max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: 800px) {
+            display: block;
+
+    }
 }
 
 .banks-list__title {
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .bank,
@@ -20,10 +27,11 @@
     padding-top: 20px;
     border-radius: 8px;
     margin-bottom: 25px;
-    margin-right: 25px;
     position: relative;
-    min-height: 350px;
-    max-height: 400px;
+    // min-height: 400px;
+    // max-height: 400px;
+    height: 400px;
+    min-height: 50%;
     background-color: rgba(252, 252, 252, .89);
     box-shadow: 0 0 15px gray;
 }
@@ -67,7 +75,7 @@
     font-size: 2rem;
     text-align: center;
     line-height: 0;
-    margin-bottom: 80px;
+    // margin-bottom: 80px;
 }
 
 .bank-indicators {
@@ -75,9 +83,18 @@
 }
 
 .bank-indicators__item {
+    background-color: red;
+    margin-bottom: 7px;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(177, 168, 168);
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.bank-indicators__item.bank-indicators__item_invalid {
+    background-color: #ee4f4f;
 }
 
 .bank-indicators__name-wrapper {
@@ -118,6 +135,10 @@
     border-radius: 8px;
     border: 1px solid gray;
 
+}
+
+.bank-template__set-name.bank-template__set-name_invalid {
+    background-color: #ee4f4f;
 }
 
 .bank-indicators__value {

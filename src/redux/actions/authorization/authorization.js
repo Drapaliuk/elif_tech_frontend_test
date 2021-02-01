@@ -9,6 +9,7 @@ export const setAuthError = payload => ({type: SET_AUTH_ERROR, payload})
 const fetchStatus = status => ({type: AUTH_FETCH_STATUS, payload: {status}})
 
 export const authorization = (authData, authorizationAction) => async dispatch => {
+    dispatch(fetchStatus('loading'))
     try {
         let responseData;
         if(authorizationAction === 'registration') {
@@ -23,7 +24,7 @@ export const authorization = (authData, authorizationAction) => async dispatch =
         localStorageManipulator.saveTokens(token, refreshToken)
         updateDefaultRequestHeaders(token, refreshToken);
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
-
+        dispatch(fetchStatus('loaded'))
 
     } catch ({response}) {
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: response.data.error, isAuthorization: false}});
@@ -53,6 +54,7 @@ export const checkOutAuth = () => async dispatch => {
         dispatch(fetchStatus('loaded'))
 
     } catch (error) {
+        dispatch(fetchStatus('error'))
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: false}});
     }
 }

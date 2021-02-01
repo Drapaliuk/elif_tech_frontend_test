@@ -1,6 +1,5 @@
 .bank-admin {
     height: 100vh;
-    padding-top: 25px;
     position: relative;
 }
 
@@ -16,18 +15,20 @@
 }
 .bank-admin__content-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 .bank-conditions {
-    padding: 60px 25px;
+    padding: 60px 15px;
     position: relative;
 }
 
 .bank-conditions__item {
-    width: 700px;
+    max-width: 700px;
+    width: 100%;
     font-size: 1.5rem;
     display: flex;
     align-items: center;

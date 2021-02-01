@@ -11,7 +11,6 @@ export function Banks() {
     
     React.useEffect(() => {
         if(banksFetchStatus === 'idle' && authFetchStatus === 'loaded') {
-            console.log('request')
             dispatch(getBanks())
         }
     }, [])

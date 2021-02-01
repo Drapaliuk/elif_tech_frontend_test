@@ -25,7 +25,9 @@
     box-shadow: 0 0 15px gray;
     border-radius: 8px;
     background-color: rgba(240, 235, 235, .75);
-
+    max-width: 30%;
+    min-width: 400px;
+    width: 100%;
 }
 
 .initial-loan,
@@ -36,7 +38,7 @@
 .initial-loan__title,
 .loan-term__title {
     line-height: 0;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .initial-loan__set-loan-wrapper,
@@ -51,10 +53,16 @@
 .initial-loan__decrement,
 .loan-term__decrement,
 .loan-term__increment {
-    width: 45px;
+    width: 15%;
     height: 45px;
     font-size: 1.5rem;
     background-color: rgb(184, 176, 176);
+}
+
+.loan-term__decrement,
+.loan-term__increment {
+    width: 45px;
+    height: 45px;
 }
 
 .initial-loan__input {
@@ -62,6 +70,7 @@
     border: none;
     font-size: 1.5rem;
     padding: 3px 15px;
+    width: 70%;
 }
 
 .loan-term__btn-wrapper {
@@ -101,6 +110,17 @@
 
 }
 
+.service-params__warning-message {
+    background-color: #ee4f4f;
+    color: #fff;
+    padding: 3px 15px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 25px;
+    white-space: pre-wrap;
+    
+}
+
 .monthly-payments {
     padding-top: 60px;
     position: relative;
@@ -133,7 +153,13 @@
     display: flex;
     padding: 5px 0;
     border-bottom: 1px solid #000;
+}
 
+.monthly-payments__year-mark {
+    padding: 5px;
+    height: 45px;
+    font-size: 1.4rem;
+    text-align: center;
 }
 
 .monthly-payments__value {

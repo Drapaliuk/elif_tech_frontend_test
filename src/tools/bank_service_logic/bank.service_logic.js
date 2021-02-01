@@ -9,17 +9,16 @@ const StatisticsByMonth = function(month, totalPayment, interestPayment, loanBal
     this.interestPayment =  Math.round(interestPayment)
     this.loanBalance =  Math.round(loanBalance)
     this.equity =  Math.round(equity)
+
 }
 
 export const mortgageCalculator = bankInfo => {
-    console.log('CALCULATE', bankInfo)
     if(
         bankInfo.loanSum <= bankInfo.minimumDownPayment ||
         bankInfo.loanTerm === 0
         ) {
-        return []
+        return {paymentsByMonth: [], totalInterestPayments: 0}
     }
-    console.log('after if')
     const loanSum = bankInfo.loanSum;
     const minimumDownPayment = bankInfo.minimumDownPayment;
     const loanBalance = loanSum - minimumDownPayment;
@@ -43,9 +42,9 @@ export const mortgageCalculator = bankInfo => {
     const interestPaymentSum = interestPaymentsByMonth.reduce((acc, el) => acc += el)
     const interestPaymentByMonth = interestPaymentSum / loanTerm
     for(let i = 0; i < loanTerm; i++) {
-        result.push(new StatisticsByMonth((i + 1), (clearMonthlyPayment + interestPaymentByMonth), interestPaymentsByMonth[i], loanBalanceByMonth[i], equityByMonth[i]))
-    }
+        result.push(new StatisticsByMonth((i + 1), (clearMonthlyPayment + interestPaymentByMonth), interestPaymentsByMonth[i], loanBalanceByMonth[i], equityByMonth[i], interestPaymentSum))
+    }  
 
-    return result
+    return {paymentsByMonth: result, totalInterestPayments: Math.round(interestPaymentSum)}
 
 }

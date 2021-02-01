@@ -11,9 +11,8 @@ export function App() {
     dispatch(checkOutAuth())
   }, [])
 
-  
-  const authFetchStatus = useSelector(state => state.authorization.fetchStatus)
-  const isAuthorization = useSelector(state => state.authorization.isAuthorization)
+  const authFetchStatus = useSelector(state => state.authorization.fetchStatus);
+  const isAuthorization = useSelector(state => state.authorization.isAuthorization);
 
     if(authFetchStatus === 'loading') {
       return <h1>Loading</h1>
@@ -31,7 +30,4 @@ export function App() {
         </BrowserRouter>
       </div>
     );
-
-  return null
-  
 }

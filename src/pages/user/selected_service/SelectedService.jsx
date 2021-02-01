@@ -2,54 +2,33 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom'
 import { getSelectedBank } from '../../../redux/selectors';
-import { isValidIndicatorValue, mortgageCalculator } from '../../../tools';
+import { isValidIndicatorValue, mortgageCalculator, increment, decrement } from '../../../tools';
 import { Header, BackBtn } from '../../../components';
-import { MonthlyPaymentsTable, ServiceIndicator } from './components';
+import { LoanTerm, MonthlyPaymentsTable, ServiceIndicator } from './components';
 import { mainBankIndicators } from '../../../service_resources';
-
-const increment = (initialSum, step,  funcForSaveValue, max) => () => {
-    const incrementedSum = initialSum + step
-    const isValidValue = isValidIndicatorValue(incrementedSum, 0, max)
-    console.log('isValidValue', max)
-    if(isValidValue) return funcForSaveValue(incrementedSum)
-}
-
-const decrement = (initialSum, step, funcForSaveValue, min) => () => {
-    const decrementedSum = initialSum - step
-    console.log('decrementedSum', decrementedSum)
-    const isValidValue = isValidIndicatorValue(decrementedSum, min)
-    if(isValidValue) return funcForSaveValue(decrementedSum)
-}
-
 
 export function SelectedService() {
     const selectedBank = useSelector(state => getSelectedBank(state))
     const [loanSum, setLoanSum] = React.useState(selectedBank?.indicators.minimumDownPayment);
-    const [changedLoanTerm, setLoanTerm] = React.useState(selectedBank?.indicators.loanTerm);
+    const [changedLoanTerm, setLoanTerm] = React.useState(1);
 
     if(!selectedBank) return <Redirect to = '/banks' />
     const { indicators } = selectedBank;
-    const {minimumDownPayment, maximumLoan, loanTerm} = indicators;
-
+    const { maximumLoan, minimumDownPayment } = indicators;
+    const isLessThanDownPayment = loanSum < selectedBank?.indicators.minimumDownPayment
 
     const changeLoanHandler = ({target}) => {
         const isValidValue = isValidIndicatorValue(target.value, 0, maximumLoan)
-        console.log('isValidValue', isValidValue)
         if(isValidValue) return setLoanSum(+target.value)
     }
 
 
-    const incrementLoanTermHandler = increment(changedLoanTerm, 1, setLoanTerm, Infinity)
-    const decrementLoanTermHandler = decrement(changedLoanTerm, 1, setLoanTerm, 0)
-    const incrementLoanSumHandler = increment(loanSum, 1000, setLoanSum, maximumLoan)
-    const decrementLoanSumHandler = decrement(loanSum, 1000, setLoanSum, 0)
+    const incrementLoanTermHandler = increment(changedLoanTerm, 1, Infinity, setLoanTerm)
+    const decrementLoanTermHandler = decrement(changedLoanTerm, 1, 0, setLoanTerm)
+    const incrementLoanSumHandler = increment(loanSum, 1000, maximumLoan, setLoanSum)
+    const decrementLoanSumHandler = decrement(loanSum, 1000, 0, setLoanSum)
 
-    console.log('changedLoanTerm', changedLoanTerm)
-    const calculatedMortgage = mortgageCalculator({...indicators, loanSum, loanTerm: changedLoanTerm})
-
-
-
-    
+    const {paymentsByMonth, totalInterestPayments} = mortgageCalculator({...indicators, loanSum, loanTerm: changedLoanTerm})
     return (
         <>
             <Header />
@@ -67,26 +46,24 @@ export function SelectedService() {
                                 <button onClick = {incrementLoanSumHandler} className = 'initial-loan__increment'>+</button>
                             </div>
                         </div>
-                        <div className = 'loan-term'>
-                            <h2 className = 'loan-term__title'>Loan term</h2>
-                            <div className = 'loan-term__set-loan-wrapper'>
-                                <div className = 'loan-term__btn-wrapper'>
-                                    <button onClick = {decrementLoanTermHandler} className = 'loan-term__decrement'>-</button>
-                                    <input value = {changedLoanTerm} className = 'loan-term__input' type="text" placeholder = '0'/>
-                                    <button onClick = {incrementLoanTermHandler} className = 'loan-term__increment'>+</button>
-                                </div>
-                                <div>Month</div>
-                            </div>
-                        </div>
+                        <LoanTerm {...{setLoanTerm, changedLoanTerm}} />
+                        
                         {mainBankIndicators.map((indicator) => {
                                 return <ServiceIndicator key = {indicator._id} 
                                                   name = {indicator.name} 
                                                   value = {selectedBank.indicators[indicator.key]} />
                         })}
+                        <ServiceIndicator name = 'Total interest payments: ' value = {totalInterestPayments} />
                         <NavLink to = '#' className = 'confirm-btn'>Confirm</NavLink>
+                        {isLessThanDownPayment  ? <div className = 'service-params__warning-message'>
+                                                        Loan sum is less then minimum down payment.
+                                                        Input value to loan sum field
+                                                         more than {minimumDownPayment}
+                                                  </div> 
+                                                : null}
                     </div>
                     
-                    <MonthlyPaymentsTable {...{calculatedMortgage}} />
+                    <MonthlyPaymentsTable {...{paymentsByMonth, isLessThanDownPayment}} />
                 </div>
                 
             </div>

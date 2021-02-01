@@ -1,7 +1,9 @@
 import React from 'react'
+import { amountYearsCalculator } from '../../../../../tools';
 
-export function MonthlyPaymentsTable({calculatedMortgage}) {
-    console.log('calculatedMortgage', calculatedMortgage)
+// const randomBalance = 
+
+export function MonthlyPaymentsTable({paymentsByMonth}) {
     return (
         <div className = 'monthly-payments'>
             <div className = 'monthly-payments_titles'>
@@ -12,22 +14,19 @@ export function MonthlyPaymentsTable({calculatedMortgage}) {
                 <div className = 'monthly-payments__title'>Equity</div>
             </div>
             <div className='monthly-payments__rows'>
-                {
-
-                    calculatedMortgage.map(({month, totalPayment, loanBalance, interestPayment, equity}) => {
-                        return (
-                            <div className = 'monthly-payments__row'>
-                                <div className = 'monthly-payments__value'>{month}</div>
-                                <div className = 'monthly-payments__value'>{totalPayment}</div>
-                                <div className = 'monthly-payments__value'>{interestPayment}</div>
-                                <div className = 'monthly-payments__value'>{loanBalance}</div>
-                                <div className = 'monthly-payments__value'>{equity}</div>
-                            </div>
+                {paymentsByMonth.map(({month, totalPayment, loanBalance, interestPayment, equity}, idx) => {
+                    return (
+                        <>
+                        <div className = 'monthly-payments__row'>
+                            <div className = 'monthly-payments__value'>{month}</div>
+                            <div className = 'monthly-payments__value'>{totalPayment}</div>
+                            <div className = 'monthly-payments__value'>{interestPayment}</div>
+                            <div className = 'monthly-payments__value'>{loanBalance}</div>
+                            <div className = 'monthly-payments__value'>{equity}</div>
+                        </div>
+                        </>
                         )
-                    })
-
-                }
-                
+                })}
             </div>
         </div>
     )
