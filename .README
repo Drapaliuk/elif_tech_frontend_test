@@ -1,13 +1,11 @@
 What is it?
 This is bank simulation application, where you can authorization
-like user or bank admin,  input your balance, create a new bank with difference
-values of mortgage, change exist banks, delete them. 
+like user or bank admin, input your balance, create a new bank with difference
+values of mortgage or change exist banks and delete them.
 Now application have only mortgage bank service, because i don`t have time add possible 
 to create another banks services with another indicators. 
 The interface of the app is fully simple and clear.
-Most of the app`s inputs have validator developed myself without service libraries.
-
-author: Vitalii Drapaliuk
+Most of the applications inputs have a validator that I developed without service libraries.
 
 Contacts:
     email: vitaliidrapaliuk@gmail.com
