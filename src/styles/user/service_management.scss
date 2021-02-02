@@ -1,17 +1,32 @@
 .service-management {
-    height: 100vh;
-    padding: 45px;
+    min-height: 100vh;
+    padding: 15px;
     position: relative;
+    padding-top: 0;
+}
+.service-management__info-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.service-management__icon {
+    margin-right: 25px;
+    margin-left: 25px;
+    width: 35px;
+    height: 35px;
 }
 
 .service-management__bank-name {
     text-align: center;
-    font-size: 3rem;
+    font-size: 1.7rem;
+    margin: 0;
 }
 
 .service-name {
     text-align: center;
-    margin-bottom: 70px;
+    font-size: 1.7rem;
 }
 
 .service-management__content-wrapper {
@@ -65,6 +80,56 @@
     height: 45px;
 }
 
+
+.mortgage-calculation-settings {
+    box-shadow: 0 0 10px gray;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.mortgage-calculation-settings__drop-button {
+    width: 100%;
+    padding: 18px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 1px gray;
+    background-color: #fff;
+    position: relative;
+    font-size: 1.2rem;
+    border-bottom: none;
+}
+
+.mortgage-calculation-settings__drop-button.mortgage-calculation-settings__drop-button_opened {
+    box-shadow: none;
+}
+
+.mortgage-calculation-settings__icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.mortgage-calculation-settings__item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.mortgage-calculation-settings__input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+.mortgage-calculation-settings__label {
+
+}
+
 .initial-loan__input {
     height: 45px;
     border: none;
@@ -102,6 +167,8 @@
     display: flex;
     align-items: center;
 }
+
+
 
 .service-params__name {
 }

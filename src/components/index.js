@@ -1,2 +1,2 @@
-export { Header } from './header/Header';
-export { BackBtn } from './back_btn/BackBtn';
+export { Header } from './header/Header'
+export { BackBtn } from './back_btn/BackBtn'

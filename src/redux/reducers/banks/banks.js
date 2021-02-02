@@ -1,5 +1,5 @@
-import produce from 'immer';
-import { CREATE_BANK, DELETE_BANK, BANK_FETCH_STATUS, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK, SET_USER_BALANCE, UPDATE_USER_BALANCE } from '../../actions_types';
+import produce from 'immer'
+import { CREATE_BANK, DELETE_BANK, BANK_FETCH_STATUS, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK, SET_USER_BALANCE, UPDATE_USER_BALANCE } from '../../actions_types'
 
 const initialState = {
     banks: [],
@@ -10,11 +10,6 @@ const initialState = {
     userBalance: 0
 
 }
-
-// {
-//     status: 'idle' | 'loading' | 'succeeded' | 'failed',
-//     error: string | null
-//   }
 
 export const banks = (prevState = initialState, action) => {
     switch(action.type) {

@@ -1,9 +1,7 @@
-import { bankAPI } from "../../../API";
-import { CREATE_BANK, DELETE_BANK, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK, BANK_FETCH_STATUS, UPDATE_USER_BALANCE } from '../../../redux/actions_types';
+import { bankAPI } from '../../../API'
+import { CREATE_BANK, DELETE_BANK, UPDATE_BANK, GET_BANKS, GET_MY_BANKS, SELECTED_BANK, BANK_FETCH_STATUS, UPDATE_USER_BALANCE } from '../../../redux/actions_types'
 
 const fetchStatus = status => ({type: BANK_FETCH_STATUS, payload: {status}});
-
-
 export const updateBank = (selectedBankId, newValue) => async dispatch => {
     const { bankId, updatedIndicators } = (await bankAPI.update(selectedBankId, newValue)).data;
     return dispatch({type: UPDATE_BANK, payload: {bankId, updatedIndicators}})
@@ -36,4 +34,4 @@ export const deleteBank = bankId => async dispatch => {
 export const updateBalance = newBalance => async dispatch => {
     const {updatedBalance} = (await bankAPI.updateBalance(newBalance)).data;
     return dispatch({type: UPDATE_USER_BALANCE, payload: {updatedBalance}})
-}
+};

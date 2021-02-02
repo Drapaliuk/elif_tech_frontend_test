@@ -1,2 +1,2 @@
-export { BankTemplate } from './bank_template/BankTemplate';
-export { Bank } from './bank/Bank';
+export { BankTemplate } from './bank_template/BankTemplate'
+export { Bank } from './bank/Bank'

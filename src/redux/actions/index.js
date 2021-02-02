@@ -1,2 +1,2 @@
-export * from './banks/banks';
-export * from './authorization/authorization';
+export * from './banks/banks'
+export * from './authorization/authorization'

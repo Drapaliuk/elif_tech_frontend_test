@@ -1,1 +1,1 @@
-export const APP_INITIALIZE = 'initialize/APP_INITIALIZE';
+export const APP_INITIALIZE = 'initialize/APP_INITIALIZE'

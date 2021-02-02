@@ -4,10 +4,13 @@ import { BrowserRouter, Redirect, Route, Router } from 'react-router-dom';
 import { Authorization, Banks, ServicesManagement, SelectedService } from './pages';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkOutAuth } from './redux/actions';
+import { localStorageManipulator } from './tools';
 
 export function App() {
   const dispatch = useDispatch()
   React.useEffect(() => {
+    console.log('token', localStorageManipulator.getRefreshToken())
+    
     dispatch(checkOutAuth())
   }, [])
 
@@ -15,7 +18,10 @@ export function App() {
   const isAuthorization = useSelector(state => state.authorization.isAuthorization);
 
     if(authFetchStatus === 'loading') {
-      return <h1>Loading</h1>
+      return <div className = 'authorization-page'>
+                <h1>Loading</h1>
+              </div>
+       
     }
 
     return (

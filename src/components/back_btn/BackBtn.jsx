@@ -1,6 +1,7 @@
 import React from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
-import { IoChevronBackSharp } from 'react-icons/io5';
+import { useHistory } from 'react-router-dom'
+import { IoChevronBackSharp } from 'react-icons/io5'
+
 export function BackBtn() {
     const {goBack} = useHistory()
     return (

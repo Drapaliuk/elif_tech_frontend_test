@@ -5,11 +5,11 @@ import { networkConnectionStatus, serverInaccessible } from '../../redux/actions
 const AUTH_TOKEN = localStorageManipulator.getToken()
 const REFRESH_TOKEN = localStorageManipulator.getRefreshToken();
 
-const herokuServerURL = 'https://drapaliuk-to-do-list-server.herokuapp.com/'
+const herokuServerURL = 'https://drapaliuk-elif-tech-server.herokuapp.com/'
 const localHost = 'http://localhost:4000'
 
 export const instance = Axios.create({
-    baseURL: localHost,
+    baseURL: herokuServerURL,
 });
   
 

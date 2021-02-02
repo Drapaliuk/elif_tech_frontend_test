@@ -1,1 +1,1 @@
-export { IndicatorsEditor } from './indicators_editor/IndicatorsEditor';
+export { IndicatorsEditor } from './indicators_editor/IndicatorsEditor'

@@ -1,59 +1,56 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom'
-import { getSelectedBank } from '../../../redux/selectors';
-import { isValidIndicatorValue, mortgageCalculator, increment, decrement } from '../../../tools';
-import { Header, BackBtn } from '../../../components';
-import { LoanTerm, MonthlyPaymentsTable, ServiceIndicator } from './components';
-import { mainBankIndicators } from '../../../service_resources';
-import { updateBalance } from '../../../redux/actions';
+import { AiFillBank } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { getSelectedBank } from '../../../redux/selectors'
+import { mortgageCalculator } from '../../../tools'
+import { Header, BackBtn } from '../../../components'
+import { LoanSum, LoanTerm, MonthlyPaymentsTable, ServiceIndicator, CalculationSettings } from './components'
+import { mainBankIndicators } from '../../../service_resources'
+import { updateBalance } from '../../../redux/actions'
 
 export function SelectedService() {
     const dispatch = useDispatch();
     const selectedBank = useSelector(state => getSelectedBank(state))
-    const [loanSum, setLoanSum] = React.useState(selectedBank?.indicators.minimumDownPayment);
-    const [changedLoanTerm, setLoanTerm] = React.useState(1);
+    
+    const [loanSum, setLoanSum] = React.useState(selectedBank?.indicators.minimumDownPayment + 1000)
+    const [changedLoanTerm, setLoanTerm] = React.useState(1)
+    const [subtractDownPayment, setSubtractDownPayment] = React.useState(false)
+    const [roundCalculatedNumbers, setRoundCalculatedNumbers] = React.useState(false)
 
     if(!selectedBank) return <Redirect to = '/banks' />
-    const { indicators } = selectedBank;
+
+    const { indicators, bankName } = selectedBank;
     const { maximumLoan, minimumDownPayment } = indicators;
-    const isLessThanDownPayment = loanSum < selectedBank?.indicators.minimumDownPayment
 
-    const changeLoanHandler = ({target}) => {
-        const isValidValue = isValidIndicatorValue(target.value, 0, maximumLoan)
-        if(isValidValue) return setLoanSum(+target.value)
-    }
+    const isLessThanDownPayment = loanSum <= selectedBank?.indicators.minimumDownPayment && subtractDownPayment
 
-    const incrementLoanSumHandler = increment(loanSum, 1000, maximumLoan, setLoanSum)
-    const decrementLoanSumHandler = decrement(loanSum, 1000, 0, setLoanSum)
     const updateBalanceHandler = () => dispatch(updateBalance(loanSum)) 
-
-    const {paymentsByMonth, totalInterestPayments} = mortgageCalculator({...indicators, loanSum, loanTerm: changedLoanTerm})
+    const paymentsByMonth = mortgageCalculator({...indicators, loanSum, loanTerm: changedLoanTerm}, 
+                                                subtractDownPayment, roundCalculatedNumbers)
     return (
         <>
             <Header />
             <div className='service-management'>
-                <div className = 'service-management__bank-name'>Bank name</div>
                 <BackBtn />
-                <h1 className = 'service-name'>Mortgage</h1>
+                <div className='service-management__info-title'>
+                    <div className = 'service-management__bank-name'>{bankName}</div>
+                    <AiFillBank className = 'service-management__icon' />
+                    <div className = 'service-name'>Mortgage</div>
+                </div>
                 <div className='service-management__content-wrapper'>
                     <div className='service-params'>
-                        <div className = 'initial-loan'>
-                            <h2 className = 'initial-loan__title'>Loan sum</h2>
-                            <div className = 'initial-loan__set-loan-wrapper'>
-                                <button onClick = {decrementLoanSumHandler} className = 'initial-loan__decrement'>-</button>
-                                <input onChange = {changeLoanHandler} value = {loanSum} className = 'initial-loan__input' type="text" placeholder = '0'/>
-                                <button onClick = {incrementLoanSumHandler} className = 'initial-loan__increment'>+</button>
-                            </div>
-                        </div>
+                    
+                        <CalculationSettings {...{setSubtractDownPayment, setRoundCalculatedNumbers, subtractDownPayment, roundCalculatedNumbers}} />
+                        <LoanSum {...{setLoanSum, loanSum, maximumLoan}} />
                         <LoanTerm {...{setLoanTerm, changedLoanTerm}} />
                         
                         {mainBankIndicators.map((indicator) => {
                                 return <ServiceIndicator key = {indicator._id} 
-                                                  name = {indicator.name} 
-                                                  value = {selectedBank.indicators[indicator.key]} />
+                                                         name = {indicator.name} 
+                                                         value = {selectedBank.indicators[indicator.key]}
+                                                         units = {indicator.units} />
                         })}
-                        <ServiceIndicator name = 'Total interest payments: ' value = {totalInterestPayments} />
                         <button onClick = {updateBalanceHandler} className = 'confirm-btn'>Confirm</button>
                         {isLessThanDownPayment  ? <div className = 'service-params__warning-message'>
                                                         Loan sum is less then minimum down payment.
@@ -63,7 +60,7 @@ export function SelectedService() {
                                                 : null}
                     </div>
                     
-                    <MonthlyPaymentsTable {...{paymentsByMonth, isLessThanDownPayment}} />
+                    <MonthlyPaymentsTable {...{paymentsByMonth}} />
                 </div>
                 
             </div>

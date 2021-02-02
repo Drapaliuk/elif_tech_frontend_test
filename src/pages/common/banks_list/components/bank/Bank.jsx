@@ -1,11 +1,9 @@
-import React from 'react';
-import { AiFillBank } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
-import { selectBank } from '../../../../../redux/actions';
-import { mainBankIndicators } from '../../../../../service_resources';
-import { DeleteBtn, Indicator, SettingsLink, EnterBankLink } from './components';
-
-
+import React from 'react'
+import { AiFillBank } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { selectBank } from '../../../../../redux/actions'
+import { mainBankIndicators } from '../../../../../service_resources'
+import { DeleteBtn, Indicator, SettingsLink, EnterBankLink } from './components'
 
 export function Bank({bankInfo, isAdmin, deleteBankHandler}) {
     const dispatch = useDispatch();

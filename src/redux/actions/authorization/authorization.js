@@ -3,7 +3,6 @@ import { updateDefaultRequestHeaders } from "../../../API/configs/instance";
 import { localStorageManipulator } from "../../../tools";
 import { SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION, AUTH_FETCH_STATUS, SET_USER_BALANCE } from '../../actions_types';
 
-const authReset = () => ({type: LOG_OUT})
 export const setRoleForAuthorization = role => ({type: SET_AUTH_ROLE, payload: {role}})
 export const setAuthError = payload => ({type: SET_AUTH_ERROR, payload})
 const fetchStatus = status => ({type: AUTH_FETCH_STATUS, payload: {status}})
@@ -12,16 +11,18 @@ export const authorization = (authData, authorizationAction, balance) => async d
     dispatch(fetchStatus('loading'))
     try {
         let responseData;
+
         if(authorizationAction === 'registration') {
             responseData = (await authAPI.registration(authData, balance)).data;
         }
         if(authorizationAction === 'login') {
             responseData = (await authAPI.login(authData)).data;
         }
-        console.log('responseData', responseData)
 
         var {token, refreshToken, role} = responseData;
+
         localStorageManipulator.saveTokens(token, refreshToken)
+        
         updateDefaultRequestHeaders(token, refreshToken);
         dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
         dispatch({type: SET_USER_BALANCE, payload: {balance: responseData.balance}})

@@ -26,31 +26,22 @@ export const UserBalanceField = ({input, meta, ...attributes}) => {
         <input className="login__password" type = {isVisibleBalance ? 'text' : 'password'} {...input} {...attributes} />
         {attributes.serverError}
 
-        {
-            isVisibleErrorMessage || isInvalid &&
-            <div class="login__valid-message">
-                <div class="triangle-right"></div>
-                <div class="triangle-down"></div>
-                {error.message}
-            </div>
-        }
-        {
-            <button className = 'visible-password-btn' type = 'button' onClick = {onShowPassword}>
-                {
-                    isVisibleBalance 
-                        ? 
-                    <IoMdEye className = 'visible-password-icon' />
-                        :
-                    <IoMdEyeOff className = 'visible-password-icon' />
-                }
-            </button>
-        }
-        {
-            isInvalid &&
-            <button onClick = {onShowInvalidMessage} class="authorization__show-invalid-message">
-                <FaExclamation className="authorization__invalid-icon" />
-            </button>
-        }
+        { isVisibleErrorMessage || isInvalid &&
+        <div class="login__valid-message">
+            <div class="triangle-right"></div>
+            <div class="triangle-down"></div>
+            {error.message}
+        </div> }
+
+        { <button className = 'visible-password-btn' type = 'button' onClick = {onShowPassword}>
+            {isVisibleBalance ? <IoMdEye className = 'visible-password-icon' />
+                                : <IoMdEyeOff className = 'visible-password-icon' />}
+        </button> }
+        
+        { isInvalid &&
+        <button onClick = {onShowInvalidMessage} class="authorization__show-invalid-message">
+            <FaExclamation className="authorization__invalid-icon" />
+        </button> }
        
     </div>)
 }

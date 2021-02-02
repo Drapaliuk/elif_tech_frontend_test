@@ -1,20 +1,20 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteBank } from '../../../redux/actions/banks/banks'
+import { deleteBank } from '../../../redux/actions'
 import { BanksList } from '../../user'
 import { Header } from '../../../components'
 
 export function MyBanks({userRole, banks}) {
     const [isCreatingBank, setCreatingBank] = React.useState(false);
     const dispatch = useDispatch();
-    const createBankHandler = data => () => setCreatingBank(data);
+    const creatingBank = data => () => setCreatingBank(data);
     const deleteBankHandler = bankId => () => dispatch(deleteBank(bankId));
     
     return (
         <>
             <Header />
-            <BanksList {...{userRole, isCreatingBank, createBankHandler, banks, deleteBankHandler}} />
-            <button disabled = {isCreatingBank} onClick = {createBankHandler(true)} className = 'create-new-bank'>Create bank</button>
+            <BanksList {...{userRole, isCreatingBank, creatingBank, banks, deleteBankHandler}} />
+            <button disabled = {isCreatingBank} onClick = {creatingBank(true)} className = 'create-new-bank'>Create bank</button>
         </>
     )
 }

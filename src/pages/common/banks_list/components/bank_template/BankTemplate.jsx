@@ -1,21 +1,21 @@
 import React from 'react'
-import { BankIndicators, isValidIndicatorValue, objectsValidator} from '../../../../../tools';
-import { useDispatch } from 'react-redux';
-import { createBank } from '../../../../../redux/actions';
-import { mainBankIndicators } from '../../../../../service_resources';
-import { BankNameInput, IndicatorInput } from './components';
+import { BankIndicators, isValidIndicatorValue, objectsValidator} from '../../../../../tools'
+import { useDispatch } from 'react-redux'
+import { createBank } from '../../../../../redux/actions'
+import { mainBankIndicators } from '../../../../../service_resources'
+import { BankNameInput, IndicatorInput } from './components'
 
-export function BankTemplate({createBankHandler}) {
+export function BankTemplate({creatingBank}) {
     const dispatch = useDispatch();
-    const [infoAboutNewBank, setInfoAboutNewBank] = React.useState(new BankIndicators());
-    const [invalidFields, setInvalidFields] = React.useState([]);
+    const [infoAboutNewBank, setInfoAboutNewBank] = React.useState(new BankIndicators())
+    const [invalidFields, setInvalidFields] = React.useState([])
 
     const setBankIndicatorInfo = (indicatorKey, min, max) => ({target}) => setInfoAboutNewBank(prevState => {
         if(isValidIndicatorValue(target.value, min, max)) {
             setInvalidFields(prevState => prevState.filter(el => el !== indicatorKey))
             return {...prevState, [indicatorKey]: Number(target.value)};
         }
-        return prevState;
+        return prevState
     })
 
     const setBankName = ({target}) => setInfoAboutNewBank(prevState => {
@@ -28,6 +28,7 @@ export function BankTemplate({createBankHandler}) {
         if(invalidFields.length === 0) {
             dispatch(createBank(infoAboutNewBank))
             setInvalidFields([])
+            creatingBank(false)()
         } else {
             setInvalidFields(invalidFields)
         }
@@ -49,9 +50,9 @@ export function BankTemplate({createBankHandler}) {
             </ul>
             <div className="template-bank__btn-wrapper">
                 <button onClick = {saveNewBank} className = 'template-bank__save-btn'>save</button>
-                <button onClick = {createBankHandler(false)} className = 'template-bank__cancel-btn'>cancel</button>
+                <button onClick = {creatingBank(false)} className = 'template-bank__cancel-btn'>cancel</button>
             </div>
-            </div>
+        </div>
     )
 }
 

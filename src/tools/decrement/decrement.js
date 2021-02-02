@@ -1,4 +1,4 @@
-import { isNumber, isValidIndicatorValue } from '../';
+import { isNumber, isValidIndicatorValue } from '../'
 
 export const decrement = (initialSum, step, min, funcForSaveValue) => () => {
     const decrementedSum = initialSum - step

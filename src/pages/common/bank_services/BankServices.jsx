@@ -42,19 +42,8 @@ export function BankServices() {
                     {!isAdmin &&
                      <NavLink className = 'bank-service-details' to = '/bank/selected-service'>Details</NavLink>}
                 </ul>
-                <div className="bank-admin__service-wrapper">
-                    <ul className = 'bank-services'>
-                        <li className = 'bank-services__item'>
-                            <button className = 'bank-services__btn'>
-                                Mortgage
-                            </button>
-                        </li>
-                    </ul>
-                    {/* {
-                        isAdmin &&
-                        <NavLink className = 'bank-admin__add-new-service' to = '#'>Add new service</NavLink>
-                    } */}
-                </div>
+                <div className = 'bank-services__btn'>Mortgage</div>
+                    
             </div>
         </div>
         </>

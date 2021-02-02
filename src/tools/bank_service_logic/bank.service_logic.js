@@ -1,50 +1,51 @@
-const interestPaymentCalculator = (loanBalance, interestRate) => {
-    const yearMonthAmount = 12
-    return (loanBalance * (interestRate / 100)) / yearMonthAmount
+import { StatisticsByMonthAccurateValue, StatisticsByMonthRoundedValue } from '../'
+
+const calculateMonthPayment = (loan, interestPayment, months) => {
+    const interestRateByMonth = (interestPayment / 100) / 12
+    const numerator = loan * interestRateByMonth * (Math.pow((1 + interestRateByMonth), months))
+    const denominator = (Math.pow((1 + interestRateByMonth), months)) - 1
+    return +(numerator / denominator).toFixed(2)
+}  
+
+const calculateInterestPayment = (loan, interestPayment) => {
+    const interestRateByMonth = (interestPayment / 100) / 12
+    return loan * interestRateByMonth
 }
 
-const StatisticsByMonth = function(month, totalPayment, interestPayment, loanBalance, equity) {
-    this.month =  Math.round(month)
-    this.totalPayment =  Math.round(totalPayment)
-    this.interestPayment =  Math.round(interestPayment)
-    this.loanBalance =  Math.round(loanBalance)
-    this.equity =  Math.round(equity)
+const calculateCleanMonthPayment = (fullLoan, loanTerm) => fullLoan / loanTerm
 
-}
+export const mortgageCalculator = (bankInfo, subtractDownPayment, roundCalculatedNumbers) => {
+    const isValidLoanSum = subtractDownPayment && bankInfo.loanSum <= bankInfo.minimumDownPayment;
+    const isValidLoanTerm = bankInfo.loanTerm === 0;
 
-export const mortgageCalculator = bankInfo => {
-    if(
-        bankInfo.loanSum <= bankInfo.minimumDownPayment ||
-        bankInfo.loanTerm === 0
-        ) {
-        return {paymentsByMonth: [], totalInterestPayments: 0}
-    }
-    const loanSum = bankInfo.loanSum;
-    const minimumDownPayment = bankInfo.minimumDownPayment;
-    const loanBalance = loanSum - minimumDownPayment;
-    const loanTerm = bankInfo.loanTerm;
-    const clearMonthlyPayment = loanBalance / loanTerm;
-    const interestPaymentsByMonth = [];
-    const equityByMonth = [];
-    const loanBalanceByMonth = []
-    let previousMonthLoanBalance = loanSum - minimumDownPayment;
-    let equity = bankInfo.minimumDownPayment;
-    const result = []
+    if(isValidLoanSum || isValidLoanTerm) return []
 
-    for(let i = 0; i < loanTerm; i++) {
-        interestPaymentsByMonth.push(interestPaymentCalculator(previousMonthLoanBalance, bankInfo.interestRate));
-        previousMonthLoanBalance -= clearMonthlyPayment
-        loanBalanceByMonth.push(previousMonthLoanBalance)
-        equityByMonth.push(equity + clearMonthlyPayment)
-        equity += clearMonthlyPayment
+    let loanSubtractedDownPayment;
+    let equity;
+    if(subtractDownPayment) {
+        loanSubtractedDownPayment = bankInfo.loanSum - bankInfo.minimumDownPayment
+        equity = bankInfo.minimumDownPayment
+    } else {
+        loanSubtractedDownPayment = bankInfo.loanSum 
+        equity = 0
+
     }
 
-    const interestPaymentSum = interestPaymentsByMonth.reduce((acc, el) => acc += el)
-    const interestPaymentByMonth = interestPaymentSum / loanTerm
-    for(let i = 0; i < loanTerm; i++) {
-        result.push(new StatisticsByMonth((i + 1), (clearMonthlyPayment + interestPaymentByMonth), interestPaymentsByMonth[i], loanBalanceByMonth[i], equityByMonth[i], interestPaymentSum))
-    }  
+    const monthPayment = calculateMonthPayment(loanSubtractedDownPayment, bankInfo.interestRate, bankInfo.loanTerm) // 125.17
+    const cleanMonthPayment = calculateCleanMonthPayment(loanSubtractedDownPayment, bankInfo.loanTerm)
+    let loanBalanceDraft = loanSubtractedDownPayment
 
-    return {paymentsByMonth: result, totalInterestPayments: Math.round(interestPaymentSum)}
+    const result = [];
 
+    for(let i = 0; i < bankInfo.loanTerm; i++) {
+        const currentInterestPayment = calculateInterestPayment(loanBalanceDraft, bankInfo.interestRate);
+        loanBalanceDraft -= cleanMonthPayment
+        equity += cleanMonthPayment
+        if(roundCalculatedNumbers) {
+            result.push(new StatisticsByMonthRoundedValue((i + 1), monthPayment, currentInterestPayment, loanBalanceDraft, equity))
+        } else {
+            result.push(new StatisticsByMonthAccurateValue((i + 1), monthPayment, currentInterestPayment, loanBalanceDraft, equity))
+        }
+    }
+    return result
 }

@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, Redirect, Route } from 'react-router-dom'
-import { BackBtn } from '../../../components';
+import { BackBtn } from '../../../components'
 import { SelectRole, Registration, Login } from './components'
-
 
 export function Authorization() {
     const isAuthorization = useSelector(state => state.authorization.isAuthorization)

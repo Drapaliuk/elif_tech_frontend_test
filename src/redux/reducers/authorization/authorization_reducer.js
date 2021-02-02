@@ -1,4 +1,4 @@
-import { IS_FETCHING_CHECK_AUTH, IS_AUTHORIZATION, SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION, AUTH_FETCH_STATUS } from '../../actions_types';
+import { IS_AUTHORIZATION, SET_AUTH_ERROR, LOG_OUT, SET_AUTH_ROLE, APP_AUTHORIZATION, AUTH_FETCH_STATUS } from '../../actions_types'
 
 const initialState = {
     isAuthorization: false,
@@ -15,6 +15,7 @@ export const authorization = (prevState = initialState, action) => {
                 ...prevState,
                 fetchStatus: action.payload.status
             }
+
         case APP_AUTHORIZATION:
             return {
                 ...prevState, 

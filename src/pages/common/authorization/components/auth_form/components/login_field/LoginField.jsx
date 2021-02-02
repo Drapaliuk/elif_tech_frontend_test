@@ -1,7 +1,7 @@
-import React from 'react';
-import { BiUser } from 'react-icons/bi';
-import { FaExclamation } from 'react-icons/fa';
-import classNames from 'classnames';
+import React from 'react'
+import { BiUser } from 'react-icons/bi'
+import { FaExclamation } from 'react-icons/fa'
+import classNames from 'classnames'
 
 export const LoginField = ({input, meta, ...attributes}) => {
     const {touched, invalid, error} = meta;

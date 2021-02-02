@@ -1,6 +1,5 @@
 import React from 'react';
-import { GoLightBulb } from 'react-icons/go';
-
+import { GoLightBulb } from 'react-icons/go'
 
 export function Indicator({name, units, value}) {
     return (
@@ -13,4 +12,3 @@ export function Indicator({name, units, value}) {
         </li>
     )
 }
-
