@@ -4,30 +4,26 @@ import { BrowserRouter, Redirect, Route, Router } from 'react-router-dom';
 import { Authorization, Banks, ServicesManagement, SelectedService } from './pages';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkOutAuth } from './redux/actions';
-import { localStorageManipulator } from './tools';
 
 export function App() {
   const dispatch = useDispatch()
   React.useEffect(() => {
-    console.log('token', localStorageManipulator.getRefreshToken())
-    
     dispatch(checkOutAuth())
   }, [])
 
   const authFetchStatus = useSelector(state => state.authorization.fetchStatus);
   const isAuthorization = useSelector(state => state.authorization.isAuthorization);
 
-    if(authFetchStatus === 'loading') {
-      return <div className = 'authorization-page'>
-                <h1>Loading</h1>
-              </div>
-       
-    }
+    // if(authFetchStatus === 'loading') {
+    //   
+    // }
+
 
     return (
       <div className='container'>
         <BrowserRouter >
-          {!isAuthorization && <Redirect to = '/auth' />}
+          {!isAuthorization &&  <Redirect to = '/auth' />}
+          {isAuthorization &&  <Redirect to = '/banks' />}
           <Route path = '/auth' component = {Authorization} />
           <Route exact path = '/banks' component = {Banks} />
           <Route exact path = '/bank/management-services' component = {ServicesManagement} />

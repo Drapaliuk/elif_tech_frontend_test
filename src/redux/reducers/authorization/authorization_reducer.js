@@ -19,6 +19,7 @@ export const authorization = (prevState = initialState, action) => {
         case APP_AUTHORIZATION:
             return {
                 ...prevState, 
+                fetchStatus: action.payload.fetchStatus,
                 isAuthorization: action.payload.isAuthorization,
                 error: action.payload.error,
                 userRole: action.payload.role

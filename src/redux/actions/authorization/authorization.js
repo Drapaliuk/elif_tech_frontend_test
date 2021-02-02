@@ -24,12 +24,14 @@ export const authorization = (authData, authorizationAction, balance) => async d
         localStorageManipulator.saveTokens(token, refreshToken)
         
         updateDefaultRequestHeaders(token, refreshToken);
-        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
+        dispatch({type: APP_AUTHORIZATION, payload: {role, fetchStatus: 'loaded', error: '', isAuthorization: true}});
         dispatch({type: SET_USER_BALANCE, payload: {balance: responseData.balance}})
+
         dispatch(fetchStatus('loaded'))
 
     } catch ({response}) {
-        dispatch({type: APP_AUTHORIZATION, payload: {role, error: response.data.error, isAuthorization: false}});
+        console.log('inside catch')
+        dispatch({type: APP_AUTHORIZATION, payload: {role, fetchStatus: 'error', error: response.data.error, isAuthorization: false}});
     } 
 }
 
@@ -52,12 +54,11 @@ export const checkOutAuth = () => async dispatch => {
 
         var { role, balance } = payload
 
-        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: true}});
+        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', fetchStatus: 'loaded', isAuthorization: true}});
         dispatch({type: SET_USER_BALANCE, payload: {balance}})
         dispatch(fetchStatus('loaded'))
 
     } catch (error) {
-        dispatch(fetchStatus('error'))
-        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', isAuthorization: false}});
+        dispatch({type: APP_AUTHORIZATION, payload: {role, error: '', fetchStatus: 'error', isAuthorization: false}});
     }
 }

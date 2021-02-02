@@ -1,9 +1,8 @@
-export const BankIndicators = function(bankName = null, interestRate = null, maximumLoan = null, minimumDownPayment = null, loanTerm = null) {
+export const BankIndicators = function(bankName = null, interestRate = null, maximumLoan = null, minimumDownPayment = null) {
     this.bankName = bankName
     this.interestRate = interestRate
     this.maximumLoan = maximumLoan
     this.minimumDownPayment = minimumDownPayment
-    this.loanTerm = loanTerm
 }
 
 export const StatisticsByMonthAccurateValue = function(month, totalPayment, interestPayment, loanBalance, equity) {

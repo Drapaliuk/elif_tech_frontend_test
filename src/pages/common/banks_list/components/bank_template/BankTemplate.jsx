@@ -9,7 +9,7 @@ export function BankTemplate({creatingBank}) {
     const dispatch = useDispatch();
     const [infoAboutNewBank, setInfoAboutNewBank] = React.useState(new BankIndicators())
     const [invalidFields, setInvalidFields] = React.useState([])
-
+    console.log('infoAboutNewBank', infoAboutNewBank)
     const setBankIndicatorInfo = (indicatorKey, min, max) => ({target}) => setInfoAboutNewBank(prevState => {
         if(isValidIndicatorValue(target.value, min, max)) {
             setInvalidFields(prevState => prevState.filter(el => el !== indicatorKey))
@@ -25,6 +25,7 @@ export function BankTemplate({creatingBank}) {
 
     const saveNewBank = () => {
         const invalidFields = objectsValidator(infoAboutNewBank, (key, value) => !value ? key : null)
+        console.log('invalidFields', invalidFields)
         if(invalidFields.length === 0) {
             dispatch(createBank(infoAboutNewBank))
             setInvalidFields([])

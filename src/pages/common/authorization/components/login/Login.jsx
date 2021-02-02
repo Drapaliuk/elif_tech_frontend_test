@@ -10,7 +10,7 @@ import { AuthForm } from '../auth_form/AuthForm'
 export function Login() {
     const authData = useSelector(state => getAuthData(state));
     const serverError = useSelector(state => getAuthError(state));
-    
+    console.log('RENDER')
     const dispatch = useDispatch();
     const onSubmit = () => dispatch(authorization(authData, 'login'))
 

@@ -6,7 +6,7 @@ export function BanksList({banks, userRole, isCreatingBank, creatingBank, delete
     
     return (
         <>
-        <h1 className = 'banks-list__title'>My banks</h1>
+        <h1 className = 'banks-list__title'>Banks</h1>
         <div className = 'banks-list'>
             {isCreatingBank && <BankTemplate {...{creatingBank}} />}
             {banks.map(bankInfo => {

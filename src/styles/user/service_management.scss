@@ -33,6 +33,11 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    @media(max-width: 1300px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .service-params {
@@ -43,6 +48,9 @@
     max-width: 30%;
     min-width: 400px;
     width: 100%;
+    @media(max-width: 1300px) {
+        margin-bottom: 50px;
+    }
 }
 
 .initial-loan,

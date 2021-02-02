@@ -6,7 +6,6 @@ export function AvailableBanks({userRole, banks}) {
     return (
         <>
             <Header />
-            <h1 className = 'banks-list__title'>Available banks</h1>
             <BanksList {...{userRole, banks}} />
         </>
        
