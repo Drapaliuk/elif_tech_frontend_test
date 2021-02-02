@@ -1,0 +1,100 @@
+What is it?
+This is bank simulation application, where you can authorization
+like user or bank admin,  input your balance, create a new bank with difference
+values of mortgage, change exist banks, delete them. 
+Now application have only mortgage bank service, because i don`t have time add possible 
+to create another banks services with another indicators. 
+The interface of the app is fully simple and clear.
+Most of the app`s inputs have validator developed myself without service libraries.
+
+author: Vitalii Drapaliuk
+
+Contacts:
+    email: vitaliidrapaliuk@gmail.com
+    phone: +38068 930 86 84
+    git hub: https://github.com/Drapaliuk
+    linkedin: https://www.linkedin.com/in/vitalii-drapaliuk-b096761a3/
+
+          
+
+Possibilities: 
+    - registration new user and login with auth tokens
+    - create / delete / update bank
+    - input yor balance
+    - calculate mortgage with / without down payment and possible round numbers to integer
+    - confirm mortgage created for simulation of bank transactions
+
+Libraries
+    - UI - React
+    - State management: Redux / React hooks
+    - Server: Express js
+    - DB: Mongo DB (Mongoose)
+    - Services libraries: axios, react-redux, redux-thunk, immer,  redux form,
+      classNames, node-sass
+
+server API:
+    /auth
+          /registration POST method
+                        request: {token: string, refreshTokenL string, balance: number, role: string}  
+                        response: {login: string, password: string, authorizationRole: string, balance: number} 
+                                                                                
+          /login POST method
+                 request: {login: string, password: string}
+                 response: {userId: string, token, string, user: Object role: string} 
+
+          /check-out-auth POST method
+                          request: {token: string, refreshToken: string}
+                          response:  { shouldUpdateTokens: {token: string, refreshToken: string} | null, 
+                                     payload: {role: string, balance: number}}
+          ERRORS:
+          {
+              'LOGIN NOT REGISTERED': {
+                  message: 'Login is not registered!'
+              },
+              'INVALID PASSWORD': {
+                  message: 'Invalid password!'
+              },
+              'LACK PASSWORD OR LOGIN': {
+                  message: 'Lack password or login!'
+              },
+              'LOGIN ALREADY USE': {
+                  message: 'This login has already use!'
+          }
+    }
+
+
+
+
+
+
+
+
+    /bank
+            bank schema    NOTE!
+            { bankName: String,
+                indicators: {
+                    interestRate: Number,
+                    maximumLoan: Number,
+                    minimumDownPayment: Number,
+                    loanTerm: Number
+                }
+            }
+
+           /  POST method
+              request: {infoAboutNewBank: [bank schema]}          
+              response: {createdBank: [bank schema]}
+
+           /  PUT method 
+              response: {bankId: string, updatedIndicators: Object}
+              request: {selectedBankId: string, newValue: [bank schema]}
+
+            / DELETE method
+              response: {deletedBankId: string} 
+              request: {bankId: string}
+            
+            / GET method
+                response:  {allBanks: array}
+
+            /balance PUT method
+                    request:  {updatedBalance: number}
+                    response:  {newBalance: number}

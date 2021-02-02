@@ -14,7 +14,7 @@ export function MonthlyPaymentsTable({paymentsByMonth}) {
                 <div className = 'monthly-payments__title'>Equity</div>
             </div>
             <div className='monthly-payments__rows'>
-                {paymentsByMonth.map(({month, totalPayment, loanBalance, interestPayment, equity}, idx) => {
+                {paymentsByMonth.map(({month, totalPayment, loanBalance, interestPayment, equity}) => {
                     return (
                         <>
                         <div className = 'monthly-payments__row'>
